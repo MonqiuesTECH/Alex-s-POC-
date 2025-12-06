@@ -1,0 +1,6 @@
+streamlit
+numpy
+librosa
+soundfile
+moviepy
+Pillow
