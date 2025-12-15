@@ -2,5 +2,7 @@ streamlit
 numpy
 librosa
 soundfile
-moviepy
 Pillow
+imageio
+imageio-ffmpeg
+moviepy==1.0.3
