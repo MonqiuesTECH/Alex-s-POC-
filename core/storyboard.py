@@ -1,43 +1,29 @@
 from __future__ import annotations
 
-from typing import List, Dict
 from pathlib import Path
+from typing import Dict, List
 
-from core.assets import ensure_alphabet_assets
-
+from core.visuals import ensure_visual_assets
 
 DEFAULT_LABELS = ["A", "B", "C"]
 
 
-def build_storyboard(
-    onset_times: List[float],
-    labels: List[str],
-    generated_assets_dir: Path,
-) -> List[Dict]:
-    """
-    Build storyboard mapping each onset time to a generated visual asset.
-    """
-    asset_map = ensure_alphabet_assets(generated_assets_dir)
+def build_storyboard(onset_times: List[float], labels: List[str], assets_dir: Path) -> List[Dict]:
+    assets = ensure_visual_assets(assets_dir)
 
+    n = min(len(onset_times), len(labels))
     events: List[Dict] = []
-    count = min(len(onset_times), len(labels))
-
-    for i in range(count):
+    for i in range(n):
         label = labels[i]
-        t = float(onset_times[i])
-
-        asset_path = asset_map.get(label)
-        if not asset_path:
+        if label not in assets:
             continue
-
         events.append(
             {
-                "t": t,
+                "t": float(onset_times[i]),
                 "label": label,
-                "asset": asset_path,   # absolute path
+                "asset": assets[label],  # absolute path
                 "duration": 1.2,
-                "effect": "bounce",
+                "effect": "pop",
             }
         )
-
     return events
