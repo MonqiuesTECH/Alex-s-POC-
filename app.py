@@ -12,6 +12,11 @@ from core.songs import get_templates, get_template_by_key
 from core.storyboard import build_storyboard_for_template
 from core.render import render_video_ffmpeg_drawtext
 
+import core.render as cr
+st.write("RENDER FILE:", cr.__file__)
+st.write("RENDER FUNC:", cr.render_video_ffmpeg_drawtext.__code__.co_filename)
+
+
 BASE_DIR = ROOT
 OUTPUTS_DIR = BASE_DIR / "outputs"
 OUTPUTS_DIR.mkdir(exist_ok=True, parents=True)
