@@ -50,8 +50,12 @@ def main():
             return
 
         # Save uploaded audio to outputs/
-        audio_path = OUTPUTS_DIR / f"tmp_{audio_file.name}"
+        suffix = Path(audio_file.name).suffix
+        audio_path = OUTPUTS_DIR / f"audio_{uuid.uuid4().hex}{suffix}"
         audio_path.write_bytes(audio_file.getbuffer())
+
+        st.write("Saved audio path:", audio_path)
+        st.write("Exists:", audio_path.exists())
 
         if make_all:
             keys = ["abc", "numbers", "colors"]
